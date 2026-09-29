@@ -528,12 +528,7 @@ section{position:relative}
   </div>
   <div class="wrap">
 
-    <form class="form-card" id="signupForm" action="https://formsubmit.co/corridasieq@gmail.com" method="POST" novalidate>
-      <!-- Configurações do FormSubmit -->
-      <input type="hidden" name="_subject" value="Nova inscrição · Movimento Rosa">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" id="nextUrl" value="">
+    <form class="form-card" id="signupForm" method="POST" novalidate>
       <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <div class="form-grid">
@@ -731,6 +726,12 @@ section{position:relative}
   var form = document.getElementById('signupForm');
   var btn = document.getElementById('submitBtn');
   var alertBox = document.getElementById('formAlert');
+  /* ==========================================================
+     ENDEREÇO DO GOOGLE APPS SCRIPT (planilha + e-mail)
+     Cole aqui a URL que termina em /exec
+     ========================================================== */
+  var ENDPOINT = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT';
+
   var thanksUrl = new URL('obrigado.html', window.location.href);
 
   function validate(){
@@ -764,7 +765,20 @@ section{position:relative}
     var mod = (form.querySelector('input[name=Modalidade]:checked') || {}).value || '';
     thanksUrl.searchParams.set('nome', nome);
     thanksUrl.searchParams.set('mod', mod);
-    window.location.href = thanksUrl.toString();
+    // Vai para obrigado.html; se a página não existir, mostra o sucesso aqui mesmo
+    fetch(thanksUrl.pathname, { method:'HEAD', cache:'no-store' })
+      .then(function(r){ if (r.ok) window.location.href = thanksUrl.toString(); else inlineSuccess(nome, mod); })
+      .catch(function(){ inlineSuccess(nome, mod); });
+  }
+
+  function inlineSuccess(nome, mod){
+    form.innerHTML =
+      '<div style="text-align:center;padding:2rem 0">' +
+      '<div class="thanks-check" style="margin:0 auto 1.4rem;background:var(--pink);color:#fff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></div>' +
+      '<h3 class="display" style="font-size:clamp(2.4rem,5vw,3.6rem)">Inscrição confirmada!</h3>' +
+      '<p style="margin:1rem auto 0;max-width:460px;color:var(--muted);font-size:1.05rem"></p></div>';
+    form.querySelector('p').textContent = 'Obrigado' + (nome ? ', ' + nome : '') + '! Sua inscrição na ' + (mod || 'prova') + ' foi recebida. Nos vemos no dia 12 de outubro, às 17h, no Parcão.';
+    form.scrollIntoView({ behavior:'smooth', block:'center' });
   }
 
   form.addEventListener('submit', function(e){
@@ -773,7 +787,6 @@ section{position:relative}
     if (!validate()) return;
     if (form._honey.value) return; // bot
 
-    document.getElementById('nextUrl').value = thanksUrl.toString();
     btn.disabled = true; btn.classList.add('loading');
     btn.querySelector('.btn-label').textContent = 'Enviando...';
 
@@ -782,15 +795,6 @@ section{position:relative}
     if (!data['Uso de imagem']) data['Uso de imagem'] = 'Não autorizo';
     data['Data da inscrição'] = new Date().toLocaleString('pt-BR');
 
-    // Plano B: envio tradicional (funciona mesmo com bloqueador de anúncios)
-    function nativeSubmit(){
-      var nome = document.getElementById('nome').value.trim().split(/\s+/)[0];
-      var mod = (form.querySelector('input[name=Modalidade]:checked') || {}).value || '';
-      thanksUrl.searchParams.set('nome', nome);
-      thanksUrl.searchParams.set('mod', mod);
-      document.getElementById('nextUrl').value = thanksUrl.toString();
-      HTMLFormElement.prototype.submit.call(form);
-    }
     function showError(msg){
       btn.disabled = false; btn.classList.remove('loading');
       btn.querySelector('.btn-label').textContent = 'Confirmar inscrição';
@@ -798,31 +802,23 @@ section{position:relative}
       alertBox.classList.add('show');
     }
 
-    var ctrl = window.AbortController ? new AbortController() : null;
-    var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 15000);
+    if (ENDPOINT.indexOf('https://script.google.com/') !== 0){
+      showError('O formulário ainda não foi configurado. Avise a organização pelo e-mail corridasieq@gmail.com.');
+      return;
+    }
 
-    fetch('https://formsubmit.co/ajax/corridasieq@gmail.com', {
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body: JSON.stringify(data),
-      signal: ctrl ? ctrl.signal : undefined
-    })
-    .then(function(r){ return r.json().catch(function(){ return {}; }); })
-    .then(function(res){
-      clearTimeout(timer);
-      if (res && (res.success === true || res.success === 'true')) return goThanks();
-      var m = String((res && res.message) || '');
-      if (/activat/i.test(m)){
-        showError('O formulário ainda está aguardando ativação. A organização precisa abrir o e-mail do FormSubmit em corridasieq@gmail.com e clicar em "Activate Form". Depois disso, é só enviar novamente.');
-        return;
-      }
-      nativeSubmit();
-    })
-    .catch(function(){
-      clearTimeout(timer);
-      // Falha de rede, bloqueador ou CORS: tenta o envio tradicional
-      nativeSubmit();
-    });
+    delete data._honey;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(data['Data de nascimento'] || '')){
+      data['Data de nascimento'] = data['Data de nascimento'].split('-').reverse().join('/');
+    }
+    var body = new URLSearchParams();
+    Object.keys(data).forEach(function(k){ body.append(k, data[k]); });
+
+    fetch(ENDPOINT, { method:'POST', mode:'no-cors', body: body })
+      .then(function(){ goThanks(); })
+      .catch(function(){
+        showError('Não foi possível enviar sua inscrição. Verifique sua internet e tente novamente. Se o problema continuar, escreva para corridasieq@gmail.com.');
+      });
   });
 })();
 </script>
