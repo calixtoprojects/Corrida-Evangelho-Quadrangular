@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Movimento Rosa · Corrida 4KM e Caminhada 2KM | IEQ Sede</title>
-<meta name="description" content="Movimento Rosa: corrida de 4 km e caminhada de 2 km no dia 12 de outubro, às 17h. Saída do Parcão (Av. Pres. Vargas, 1553) e chegada na IEQ Sede. Inscreva-se!">
+<meta name="description" content="Movimento Rosa: corrida de 4 km e caminhada de 2 km no dia 12 de outubro, às 17h, com inscrições gratuitas. Saída do Parcão (Av. Pres. Vargas, 1553) e chegada na IEQ Sede. Inscreva-se!">
 <meta name="theme-color" content="#EC2E8C">
 <meta property="og:title" content="Movimento Rosa · Corrida 4KM e Caminhada 2KM">
 <meta property="og:description" content="12 de outubro, 17h. Saída: Parcão · Chegada: IEQ Sede. Não fique de fora dessa experiência única!">
@@ -91,6 +91,11 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hero-sub{font-size:clamp(1.5rem,2.4vw,2.1rem);color:var(--ink);margin-bottom:1rem}
 .hero-sub em{color:#fff;background:var(--pink);padding:0 .25em;box-decoration-break:clone;-webkit-box-decoration-break:clone;font-style:italic}
 .hero-text{font-size:1.05rem;color:var(--ink-2);max-width:430px;margin-bottom:1.6rem;font-weight:500}
+.free-badge{display:inline-flex;align-items:center;gap:.6rem;background:var(--lime);color:var(--ink);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(1rem,1.5vw,1.2rem);padding:.6rem 1.2rem .6rem 1rem;border-radius:999px;margin-bottom:1.1rem;box-shadow:0 10px 30px -10px rgba(14,16,34,.45);transform:rotate(-2deg);transition:transform .2s ease}
+.free-badge:hover{transform:rotate(0) scale(1.03)}
+.free-dot{width:10px;height:10px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 0 rgba(236,46,140,.7);animation:pulse 1.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(236,46,140,0)}100%{box-shadow:0 0 0 0 rgba(236,46,140,0)}}
+.hero-card .kicker{display:flex}
 .hero-actions{display:flex;flex-wrap:wrap;gap:.8rem}
 .countdown{display:flex;gap:.6rem;margin-top:1.6rem}
 .countdown div{background:rgba(255,255,255,.75);backdrop-filter:blur(6px);border-radius:14px;padding:.6rem .8rem;min-width:68px;text-align:center}
@@ -335,7 +340,7 @@ section{position:relative}
       <a href="#percurso">Percurso</a>
       <a href="#movimento">O Movimento</a>
       <a href="#como-participar">Como participar</a>
-      <a href="#inscricao" class="btn btn-pink">Inscreva-se</a>
+      <a href="#inscricao" class="btn btn-pink">Inscreva-se grátis</a>
     </nav>
   </div>
 </header>
@@ -358,12 +363,13 @@ section{position:relative}
 
   <div class="wrap hero-content">
     <div class="hero-card reveal">
+      <a href="#inscricao" class="free-badge"><span class="free-dot"></span>Inscrições gratuitas</a>
       <span class="kicker">Corrida 4KM · Caminhada 2KM</span>
       <h1 class="display hero-title">Movimento <span>Rosa</span></h1>
       <p class="slogan hero-sub">Não fique de fora dessa <em>experiência única</em></p>
       <p class="hero-text">Vista rosa, reúna quem você ama e venha fazer parte de um movimento pela vida, pela saúde e pela conscientização.</p>
       <div class="hero-actions">
-        <a href="#inscricao" class="btn btn-pink">Quero me inscrever
+        <a href="#inscricao" class="btn btn-pink">Inscrever-me grátis
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
         <a href="#percurso" class="btn btn-ghost">Ver percurso</a>
@@ -514,9 +520,9 @@ section{position:relative}
   <svg class="wave-divider" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true" style="background:#fff"><path d="M0 60C240 0 480 0 720 45s480 60 720 0v45H0Z" fill="#EC2E8C"/></svg>
   <div class="wrap">
     <div class="signup-head reveal">
-      <span class="kicker">Inscrições abertas</span>
+      <span class="kicker">Inscrições abertas · 100% gratuitas</span>
       <h2 class="display">Garanta sua vaga</h2>
-      <p>Preencha seus dados. Leva menos de 2 minutos.</p>
+      <p>A inscrição é gratuita. Preencha seus dados, leva menos de 2 minutos.</p>
     </div>
   </div>
   </div>
@@ -655,7 +661,7 @@ section{position:relative}
       <div>
         <h4>Contato</h4>
         <p><a href="mailto:corridasieq@gmail.com">corridasieq@gmail.com</a></p>
-        <p style="margin-top:1rem"><a href="#inscricao" class="btn btn-pink" style="padding:.8rem 1.2rem;font-size:.8rem;color:#fff">Inscreva-se</a></p>
+        <p style="margin-top:1rem"><a href="#inscricao" class="btn btn-pink" style="padding:.8rem 1.2rem;font-size:.8rem;color:#fff">Inscreva-se grátis</a></p>
       </div>
     </div>
     <div class="footer-bottom">
