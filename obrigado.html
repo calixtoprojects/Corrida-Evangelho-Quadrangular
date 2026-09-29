@@ -343,11 +343,7 @@ section{position:relative}
       <h1 class="display" style="margin-top:.8rem"><span id="hello">Obrigado!</span>Você está<br>no movimento.</h1>
       <p class="lead">Sua inscrição no Movimento Rosa foi enviada com sucesso. Agora é só separar a roupa rosa, chamar quem você ama e nos encontrar no Parcão.</p>
       <div class="thanks-actions">
-        <a class="btn btn-white" id="shareBtn" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg>
-          Convidar pelo WhatsApp
-        </a>
-        <a class="btn btn-outline" href="index.html">Voltar ao site</a>
+        <a class="btn btn-white" href="index.html">Voltar ao site</a>
       </div>
       <p class="thanks-note">Guarde esta página. Em caso de dúvidas, fale com a organização pelo e-mail <a href="mailto:corridasieq@gmail.com" style="text-decoration:underline">corridasieq@gmail.com</a>.</p>
     </div>
@@ -379,10 +375,6 @@ section{position:relative}
     document.getElementById('tName').textContent = nome;
   }
   if (mod) document.getElementById('tMod').textContent = mod;
-
-  var site = new URL('index.html', location.href).toString().replace(/index\.html$/, '');
-  var msg = 'Acabei de me inscrever no Movimento Rosa 🎀 Corrida de 4km e Caminhada de 2km, dia 12/10 às 17h, saindo do Parcão até a IEQ Sede. Vem comigo! Inscreva-se: ' + site;
-  document.getElementById('shareBtn').href = 'https://wa.me/?text=' + encodeURIComponent(msg);
 })();
 </script>
 </body>
