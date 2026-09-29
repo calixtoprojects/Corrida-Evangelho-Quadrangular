@@ -265,6 +265,8 @@ section{position:relative}
   .countdown b{font-size:1.5rem}
   .band .wrap{grid-template-columns:1fr 1fr;gap:1.2rem .8rem}
   .band-item svg{width:30px;height:30px}
+  .band-item strong.nw{white-space:nowrap;font-size:1.3rem}
+  .band-item{gap:.6rem}
   .mosaic{grid-template-columns:1fr}
   .tile{min-height:220px}
   .tile-photo{min-height:440px}
@@ -351,7 +353,7 @@ section{position:relative}
         <svg viewBox="0 0 40 54" fill="none" aria-hidden="true"><path d="M8 50 24 22c4-7 3-17-4-17s-8 10-4 17l16 28" stroke="#EC2E8C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <p class="ticket-name" id="tName">Participante confirmado</p>
-      <p class="ticket-mod" id="tMod">Corrida &amp; Caminhada 4KM</p>
+      <p class="ticket-mod" id="tMod">Corrida 4KM · Caminhada 2KM</p>
       <div class="ticket-grid">
         <div><small>Data</small><b>12 Out</b></div>
         <div><small>Largada</small><b>17H</b></div>
@@ -374,7 +376,7 @@ section{position:relative}
   if (mod) document.getElementById('tMod').textContent = mod;
 
   var site = new URL('index.html', location.href).toString().replace(/index\.html$/, '');
-  var msg = 'Acabei de me inscrever no Movimento Rosa 🎀 Corrida e Caminhada de 4km, dia 12/10 às 17h, saindo do Parcão até a IEQ Sede. Vem comigo! Inscreva-se: ' + site;
+  var msg = 'Acabei de me inscrever no Movimento Rosa 🎀 Corrida de 4km e Caminhada de 2km, dia 12/10 às 17h, saindo do Parcão até a IEQ Sede. Vem comigo! Inscreva-se: ' + site;
   document.getElementById('shareBtn').href = 'https://wa.me/?text=' + encodeURIComponent(msg);
 })();
 </script>
